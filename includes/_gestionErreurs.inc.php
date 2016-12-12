@@ -13,7 +13,7 @@ function estChiffresOuEtLettres($valeur) {
 }
 
 function estLettres($valeur) {
-    return preg_match('/[^a-zA-Z]/', $valeur) != 1;
+    return preg_match('/[^a-zA-Z]/', $valeur) != 1;//return preg_match("#^[A-Z \\'.-]{2,100}$#i", $valeur) != 1;//ajout de l'autorisation de l'espace du tiret - et de l'apostrophe ' return preg_match('/[^a-zA-Z]/', $valeur) != 1;
 }
 
 
