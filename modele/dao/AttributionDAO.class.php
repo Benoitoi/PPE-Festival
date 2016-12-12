@@ -44,25 +44,11 @@ class AttributionDAO {
      * @return boolean =FALSE si l'opérationn échoue
      */
     public static function insert($objet) {
-        //if ($nbChambres == 0) {
-        //} else {
-        //if ($lgAttrib != 0) {
-        //} else {
-//        $idEtab = $objet['idEtab'];
-//        $idTypeChambre = $objet['idTypeChambre'];
-//        $idGroupe = $objet['idGroupe'];
-//        $nombreChambres = $objet['nombreChambres'];
         $req = "INSERT INTO Attribution VALUES(:idEtab, :idTypeChambre, :idGroupe, :nombreChambres)";
         $stmt = Bdd::getPdo()->prepare($req);
         self::metierVersEnreg($objet, $stmt);
-//        $stmt->bindParam(':idEtab', $idEtab);
-//        $stmt->bindParam(':idTypeChambre', $idTypeChambre);
-//        $stmt->bindParam(':idGroupe', $idGroupe);
-//        $stmt->bindParam(':nombreChambres', $nombreChambres);
         $ok = $stmt->execute();
         return $ok;
-        //}
-        //}
     }
 
     /**
@@ -72,28 +58,20 @@ class AttributionDAO {
      * @return boolean =FALSE si l'opérationn échoue
      */
     public static function update($id, $objet) {
-        //if ($nbChambres == 0) {
-        //} else {
-        //if ($lgAttrib != 0) {
         $idEtab = $id['idEtab'];
         $idTypeChambre = $id['idTypeChambre'];
         $idGroupe = $id['idGroupe'];
         $req = "UPDATE Attribution SET nombreChambres=:nombreChambres WHERE idEtab=:idEtab AND idTypeChambre=:idTypeChambre AND idGroupe=:idGroupe";
         $stmt = Bdd::getPdo()->prepare($req);
         self::metierVersEnreg($objet, $stmt);
-//        $stmt->bindParam(':nombreChambres', $objet);
         $stmt->bindParam(':idEtab', $idEtab);
         $stmt->bindParam(':idTypeChambre', $idTypeChambre);
         $stmt->bindParam(':idGroupe', $idGroupe);
         $ok = $stmt->execute();
         return $ok;
-        //} else {
-        //}
-        //}
     }
 
     public static function delete($id) {
-        //if ($nbChambres == 0) {
         $idEtab = $id['idEtab'];
         $idTypeChambre = $id['idTypeChambre'];
         $idGroupe = $id['idGroupe'];
@@ -104,7 +82,6 @@ class AttributionDAO {
         $stmt->bindParam(':idGroupe', $idGroupe);
         $ok = $stmt->execute();
         return $ok;
-        //}
     }
 
     public static function getAll() {
@@ -153,7 +130,6 @@ class AttributionDAO {
     }
     
     public static function obtenirNbOccupGroupe($idEtab, $idTypeChambre, $idGroupe) {
-        //global $connexion;
         $req = "SELECT nombreChambres FROM Attribution WHERE idEtab=:idEtab AND idTypeChambre=:idTypeChambre AND idGroupe=:idGroupe";
         $stmt = Bdd::getPdo()->prepare($req);
         $stmt->bindParam(':idEtab', $idEtab);
@@ -172,7 +148,6 @@ class AttributionDAO {
         $stmt = Bdd::getPdo()->prepare($req);
         $stmt->bindParam(':idEtab', $idEtab);
         $stmt->execute();
-        //$stmt->execute(array($idEtab));
         return $stmt->fetchColumn();
     }
     
@@ -181,9 +156,17 @@ class AttributionDAO {
         $stmt = Bdd::getPdo()->prepare($req);
         $stmt->bindParam(':idTypeChambre', $idTypeChambre);
         $stmt->execute();
-        //$stmt->execute(array($idTypeChambre));
         return $stmt->fetchColumn();
     }
+    
+    public static function existeAttributionsGroupe($idGroupe) {
+        $req = "SELECT COUNT(*) FROM Attribution WHERE idGroupe=:idGroupe";
+        $stmt = Bdd::getPdo()->prepare($req);
+        $stmt->bindParam(':idGroupe', $idGroupe);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
     public static function obtenirNbAttribGrp($idEtab, $idTypeChambre, $idGroupe) {
         $req = "SELECT COUNT(*) AS nombreAttribGroupe FROM Attribution WHERE idEtab= :idEtab AND idTypeChambre=:idTypeChambre AND idGroupe=:idGroupe";
         $stmt = Bdd::getPdo()->prepare($req);

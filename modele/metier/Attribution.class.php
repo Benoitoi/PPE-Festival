@@ -67,9 +67,4 @@ class Attribution {
     function setNbChambres($nbChambres) {
         $this->nbChambres = $nbChambres;
     }
-
-
-   
-
-
 }

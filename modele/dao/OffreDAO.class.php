@@ -68,10 +68,6 @@ class OffreDAO implements IDAO {
     }
     
     public static function update($id, $objet) {       
-        //if ($nombreChambres == 0) {
-        //}else {
-        //$lgOffre = getNbCh($idEtab, $idTypeChambre);
-        //if ($lgOffre != 0) {
         $idEtab = $id['idEtab'];
         $idTypeChambre = $id['idTypeChambre'];
         $ok = false; 
@@ -80,23 +76,10 @@ class OffreDAO implements IDAO {
         self::metierVersEnreg($objet, $stmt);
         $stmt->bindParam(':idEtab', $idEtab);
         $stmt->bindParam(':idTypeChambre', $idTypeChambre);
-//        $stmt->bindParam(':nombreChambres', $objet);
         $ok = $stmt->execute();
         $ok = $ok && ($stmt->rowCount() > 0);
         return $ok;
-        //}
-        //}
     }
-    
-    /*public static function getNbCh($idEtab, $idTypeChambre) {  
-        $req2 = "SELECT nombreChambres FROM Offre WHERE idEtab=:idEtab AND idTypeChambre=:idTypeCh";
-        $stmt2 = Bdd::getPdo()->prepare($req2);
-        $stmt2->bindParam(':idEtab', $idEtab);
-        $stmt2->bindParam(':idTypeCh', $idTypeChambre);
-        $stmt2->execute();
-        $lgOffre = $stmt2->fetchColumn();
-        return $lgOffre;
-    }*/
     
     public static function delete($id) {             
         //if ($nombreChambres == 0) {
@@ -114,26 +97,13 @@ class OffreDAO implements IDAO {
     }
     
     public static function insert($objet) {
-        //if ($nombreChambres == 0) {
-        //}else {
-        //$lgOffre = getNbCh($idEtab, $idTypeChambre);
-        //if ($lgOffre != 0) {
-        //} else {
-//        $idEtab = $object['idEtab'];
-//        $idTypeChambre = $object['idTypeChambre'];
-//        $nombreChambres = $object['nombreChambres'];
         $ok = false; 
         $req = "INSERT INTO Offre VALUES(:idEtab, :idTypeChambre, :nombreChambres)";
         $stmt = Bdd::getPdo()->prepare($req);
         self::metierVersEnreg($objet, $stmt);
-//        $stmt->bindParam(':idEtab', $idEtab);
-//        $stmt->bindParam(':idTypeCh', $idTypeChambre);
-//        $stmt->bindParam(':nombreChambres', nombreChambres);
         $ok = $stmt->execute();
         $ok = $ok && ($stmt->rowCount() > 0);
-        return $ok;
-        //}
-        //}      
+        return $ok; 
     }
     
     public static function obtenirNbOffre($idEtab, $idTypeChambre) {
@@ -154,53 +124,5 @@ class OffreDAO implements IDAO {
         $nbOccup = AttributionDAO::obtenirNbOccup($idEtab, $idTypeChambre);
         return ($nombreChambres >= $nbOccup);
     }
-    
-    /*public static function insert($objet) {
-        $ok = false;
-        $requete = "INSERT INTO Offre VALUES (:idEtab, :idTypeChambre, :nombreChambres)";
-        $stmt = Bdd::getPdo()->prepare($requete);
-        self::metierVersEnreg($objet, $stmt);
-        $ok = $stmt->execute();
-        $ok = $ok && $stmt->rowCount() > 0;
-        return $ok;
-    }
-
-    public static function update($idEtab, $idTypeChambre, $nombreChambres) {
-        $ok = false;
-        $requete = "UPDATE Offre SET nombreChambres = :nombreChambres WHERE idEtab = :idEtab AND idTypeChambre = :idTypeChambre";
-        $stmt = Bdd::getPdo()->prepare($requete);
-        self::metierVersEnreg($objet, $stmt);
-        $stmt->bindParam(':idEtab', $idEtab);
-        $stmt->bindParam(':idTypeChambre', $idTypeChambre); 
-        $stmt->bindParam(':nombreChambres', $nombreChambres);        
-        $ok = $stmt->execute();
-        $ok = $ok && ($stmt->rowCount() > 0);
-        return $ok;
-    }
-
-    public static function delete($idEtab) {
-        $ok = false;
-        $requete = "DELETE FROM Offre WHERE idEtab = :idEtab";
-        $stmt = Bdd::getPdo()->prepare($requete);
-        $stmt->bindParam(':idEtab', $idEtab);
-        $ok = $stmt->execute();
-        $ok = $ok && ($stmt->rowCount() > 0);
-        return $ok;
-    }*/
-
-
-    /**
-     * Recherche un identifiant d'Etablissement existant
-     * @param string $idEtab de l'etablissement recherché
-     * @return int le nombre d'offres à cet id 
-     */
-    /*public static function isAnExistingId($idEtab) {
-        $requete = "SELECT COUNT(*) FROM Offre WHERE idEtab = :idEtab";
-        $stmt = Bdd::getPdo()->prepare($requete);
-        $stmt->bindParam(':idEtab', $idEtab);
-        $stmt->execute();
-        return $stmt->fetchColumn(0);
-    }*/
-
 }
 
