@@ -69,6 +69,9 @@ echo "
 	      <p>
 	      </p>
          <li>Consulter, réaliser ou modifier les attributions des chambres aux groupes dans les établissements.
+              <p>
+	      </p>
+         <li>Consulter, créer, modifier ou supprimer des groupes sans attributions.
       </ul>
       </td>
    </tr>
