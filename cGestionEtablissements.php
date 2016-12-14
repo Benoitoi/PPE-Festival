@@ -90,8 +90,7 @@ switch ($action) {
 Bdd::deconnecter();
 
 function verifierDonneesEtabC($id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable, $adresseElectronique) {
-    if ($id == "" || $nom == "" || $adresseRue == "" || $codePostal == "" ||
-            $ville == "" || $tel == "" || $nomResponsable == "") {
+    if ($id == "" || $nom == "" || $adresseRue == "" || $codePostal == "" ||$ville == "" || $tel == "" || $nomResponsable == "") {
         ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
     }
     if ($id != "") {
@@ -107,12 +106,10 @@ function verifierDonneesEtabC($id, $nom, $adresseRue, $codePostal, $ville, $tel,
         }
     }
     if ($nom != "" && !estLettres($nom)) {
-            ajouterErreur
-                    ("Le nom d'établissement doit comporter uniquement des lettres");
+            ajouterErreur("Le nom d'établissement doit comporter uniquement des lettres");
         } else {
-            
-        if ($nom != "" && EtablissementDAO::isAnExistingName(true, $id, $nom)) {
-        ajouterErreur("L'établissement $nom existe déjà");
+        if (EtablissementDAO::isAnExistingName(true, $id, $nom)) {
+            ajouterErreur("L'établissement $nom existe déjà");
         }
     }
     if ($codePostal != "" && !estUnCp($codePostal)) {
@@ -128,17 +125,14 @@ function verifierDonneesEtabC($id, $nom, $adresseRue, $codePostal, $ville, $tel,
 }
 
 function verifierDonneesEtabM($id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable, $adresseElectronique) {
-    if ($nom == "" || $adresseRue == "" || $codePostal == "" || $ville == "" ||
-            $tel == "" || $nomResponsable == "") {
+    if ($nom == "" || $adresseRue == "" || $codePostal == "" || $ville == "" || $tel == "" || $nomResponsable == "") {
         ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
     }
     if ($nom != "" && !estLettres($nom)) {
-            ajouterErreur
-                    ("Le nom d'établissement doit comporter uniquement des lettres");
-        } else {
-            
-        if ($nom != "" && EtablissementDAO::isAnExistingName(false, $id, $nom)) {
-        ajouterErreur("L'établissement $nom existe déjà");
+            ajouterErreur("Le nom d'établissement doit comporter uniquement des lettres");
+        } else {  
+        if (EtablissementDAO::isAnExistingName(false, $id, $nom)) {
+            ajouterErreur("L'établissement $nom existe déjà");
         }
     }
     if ($codePostal != "" && !estUnCp($codePostal)) {
@@ -149,7 +143,6 @@ function verifierDonneesEtabM($id, $nom, $adresseRue, $codePostal, $ville, $tel,
     }
     if ($adresseElectronique != "" && !filter_var($adresseElectronique, FILTER_VALIDATE_EMAIL)){
         ajouterErreur('Le format de l\'adresse élèctronique n\'est pas valide');
-    
     }
 }
 

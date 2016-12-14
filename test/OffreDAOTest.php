@@ -88,14 +88,6 @@
             echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
         }
 
-        /*// Test n°6
-        echo "<h3>6-getNbCh - obtenir le nombre de chambre </h3>";
-        try {
-            $objet = OffreDAO::getNbCh($idEtab, 'C2');
-            echo $objet;
-        } catch (Exception $ex) {
-            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
-        }*/
         // Test n°6
         echo "<h3>6- obtenirNbOffre - obtenir le nombre d'offres</h3>";
         try {
@@ -130,102 +122,8 @@
             echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
         } 
         
-       /*// Test n°3
-        echo "<h3>3- insert</h3>";
-        try {
-            $idEtab = '9999999Z';
-            $objet = new Offre($idEtab, 'C2', 5);
-            $ok = OffreDAO::insert($objet);
-            if ($ok) {
-                echo "<h4>ooo réussite de l'insertion ooo</h4>";
-                $objetLu = OffreDAO::getOneById($id);
-                var_dump($objetLu);
-            } else {
-                echo "<h4>>ooo réussite du test : la requête d'insertion a échoué ooo</h4>";
-            }
-        } catch (Exception $ex) {
-            echo "<h4>>ooo réussite du test : la requête d'insertion a échoué ooo</h4>" . $ex->getMessage();
-        }
-
-        // Test n°3
-        echo "<h3>3- insert déjà présent</h3>";
-        try {
-            $objet = new Offre($idEtab, 'C2', 5);
-            $ok = OffreDAO::insert($objet);
-            if ($ok) {
-                echo "<h4>*** échec du test : l'insertion ne devrait pas réussir  ***</h4>";
-                $objetLu = OffreDAO::getOneById($id);
-                var_dump($objetLu);
-            } else {
-                echo "<h4>>ooo réussite du test : la requête d'insertion a logiquement échoué ooo</h4>";
-            }
-        } catch (Exception $ex) {
-            echo "<h4>>ooo réussite du test : la requête d'insertion a logiquement échoué ooo</h4>" . $ex->getMessage();
-        }*/
-
-
-        /*// Test n°4
-        echo "<h3>4- update</h3>";
-        try {
-            $idTypeChambre = "C1";
-            $idEtab = "0350773A";
-            $nbChambres = 44;
-            $ok = OffreDAO::update($idEtab, $idTypeChambre, $nbChambres);
-            if ($ok) {
-                echo "<h4>ooo réussite de la mise à jour de l'etablissement d'id 0350773A il a désormais ".$nbChambres." pour les chambres de type C1 ooo</h4>";
-                $objetLu = OffreDAO::getOneById($idEtab);
-                var_dump($objetLu);
-            } else {
-                echo "<h4>*** échec de la mise à jour ***</h4>";
-            }
-        } catch (Exception $ex) {
-            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
-        }
-
-        // Test n°5
-        echo "<h3>5- delete</h3>";
-        try {
-            $ok = OffreDAO::delete($idEtab);
-            if ($ok) {
-                echo "<h4>ooo réussite de la suppression ooo</h4>";
-            } else {
-                echo "<h4>*** échec de l'insertion ***</h4>";
-            }
-        } catch (Exception $ex) {
-            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
-        }*/
-
-        /*// Test n°6
-        echo "<h3>6-1- isAnExistingId - id existant</h3>";
-        try {
-            $id = "0350773A"; // id existant
-            $ok = OffreDAO::isAnExistingId($id);
-            if ($ok == 1) {
-                echo "<h4>ooo réussite du test, l'id existe ooo</h4>";
-            } else {
-                echo "<h4>*** échec du test, l'id n'existe pas ***</h4>";
-            }
-        } catch (Exception $ex) {
-            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
-        }
-        echo "<h3>6-2- isAnExistingId - id inexistant</h3>";
-        try {
-            $id = "0350773x"; // id inexistant
-            $ok = OffreDAO::isAnExistingId($id);
-            //$ok = $ok && !OffreDAO::isAnExistingId('AZERTY');
-            if ($ok == 1) {
-                echo "<h4>*** échec du test, l'id existe ***</h4>";
-                
-            } else {
-                echo "<h4>ooo réussite du test, l'id n'existe pas ooo</h4>";
-            }
-        } catch (Exception $ex) {
-            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
-        }*/
-        
         Bdd::deconnecter();
         ?>
-
 
     </body>
 </html>

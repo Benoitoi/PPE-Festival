@@ -86,16 +86,14 @@ switch ($action) {
 Bdd::deconnecter();
 
 function verifierDonneesGroupeC($id, $nom, $identiteResponsable, $adressePostale, $nombrePersonnes, $nomPays, $hebergement) {
-    if ($id == "" || $nom == "" || $nombrePersonnes == "" || $nomPays == "" ||
-            $hebergement == "") {
+    if ($id == "" || $nom == "" || $nombrePersonnes == "" || $nomPays == "" || $hebergement == "") {
         ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
     }
     if ($id != "") {
         // Si l'id est constitué d'autres caractères que de lettres non accentuées 
         // et de chiffres, une erreur est générée
         if (!estChiffresOuEtLettres($id)) {
-            ajouterErreur
-                    ("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
+            ajouterErreur("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
         } else {
             if (GroupeDAO::isAnExistingId($id)) {
                 ajouterErreur("Le groupe $id existe déjà");
@@ -104,9 +102,8 @@ function verifierDonneesGroupeC($id, $nom, $identiteResponsable, $adressePostale
     }
     if ($nom != "" && !estLettres($nom)) {
             ajouterErreur("Le nom du groupe doit comporter uniquement des lettres");
-        } else {
-            
-        if ($nom != "" && GroupeDAO::isAnExistingName(true, $id, $nom)) {
+        } else {            
+        if (GroupeDAO::isAnExistingName(true, $id, $nom)) {
             ajouterErreur("Le groupe $nom existe déjà");
         }
     }
@@ -122,15 +119,13 @@ function verifierDonneesGroupeC($id, $nom, $identiteResponsable, $adressePostale
 }
 
 function verifierDonneesGroupeM($id, $nom, $identiteResponsable, $adressePostale, $nombrePersonnes, $nomPays, $hebergement) {
-    if ($nom == "" || $nombrePersonnes == "" || $nomPays == "" ||
-            $hebergement == "") {
+    if ($nom == "" || $nombrePersonnes == "" || $nomPays == "" || $hebergement == "") {
         ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
     }
     if ($nom != "" && !estLettres($nom)) {
             ajouterErreur("Le nom du groupe doit comporter uniquement des lettres");
-        } else {
-            
-        if ($nom != "" && GroupeDAO::isAnExistingName(false, $id, $nom)) {
+        } else {            
+        if (GroupeDAO::isAnExistingName(false, $id, $nom)) {
             ajouterErreur("Le groupe $nom existe déjà");
         }
     }
