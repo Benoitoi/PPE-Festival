@@ -126,9 +126,9 @@
         try {
             $objet = AttributionDAO::existeAttributionsEtab('nonexistant');
             if($objet){
-                echo "<h4>Une attribution existe pour l'établissement d'id ".$idEtab." : test non conforme</h4>";
+                echo "<h4>Une attribution existe pour l'établissement d'id nonexistant : test non conforme</h4>";
             }else{
-                echo "<h4>Une attribution existe pas pour l'établissement d'id ".$idEtab." : test conforme</h4>";
+                echo "<h4>Une attribution existe pas pour l'établissement d'id nonexistant : test conforme</h4>";
             }
         } catch (Exception $ex) {
             echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
@@ -152,15 +152,41 @@
         try {
             $objet = AttributionDAO::existeAttributionsTypeChambre('nonexistant');
             if($objet){
-                echo "<h4>Une attribution existe pour le type chambre ".$idTypeChambre." : test non conforme</h4>";
+                echo "<h4>Une attribution existe pour le type chambre nonexistant: test non conforme</h4>";
             }else{
-                echo "<h4>Une attribution existe pas pour le type chambre ".$idTypeChambre." : test conforme</h4>";
+                echo "<h4>Une attribution existe pas pour le type chambre nonexistant : test conforme</h4>";
             }
         } catch (Exception $ex) {
             echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
         } 
         
         // Test n°10
+        echo "<h3>9- existeAttributionsGroupe - verifier si l'attribution existe pour un groupe | CAS EXISTANT</h3>";
+        try {
+            $objet = AttributionDAO::existeAttributionsGroupe($idGroupe);
+            if($objet){
+                echo "<h4>Une attribution existe pour le groupe ".$idGroupe." : test conforme</h4>";
+            }else{
+                echo "<h4>Une attribution existe pas pour le type chambre ".$idGroupe." : test non conforme</h4>";
+            }
+        } catch (Exception $ex) {
+            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
+        } 
+        
+        // Test n°10-2
+        echo "<h3>9-2 existeAttributionsGroupe - verifier si l'attribution existe pour un groupe | CAS NON EXISTANT</h3>";
+        try {
+            $objet = AttributionDAO::existeAttributionsGroupe('nonexistant');
+            if($objet){
+                echo "<h4>Une attribution existe pour le groupe nonexistant : test non conforme</h4>";
+            }else{
+                echo "<h4>Une attribution existe pas pour le groupe nonexistant : test conforme</h4>";
+            }
+        } catch (Exception $ex) {
+            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
+        }
+        
+        // Test n°11
         echo "<h3>10- obtenirNbAttribGrp - obtenir le nombre d'attributions par groupe </h3>";
         try {
             $objet = AttributionDAO::obtenirNbAttribGrp('0350773A' , 'C2', 'g004');
@@ -169,7 +195,7 @@
             echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
         } 
         
-        // Test n°11
+        // Test n°12
         echo "<h3>11- obtenirNbOccup </h3>";
         try {
             $objet = AttributionDAO::obtenirNbOccup('0350773A' , 'C2');
